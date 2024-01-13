@@ -1,2 +1,4 @@
-# web-420
-WEB420-323M RESTFul APIs
+# WEB 420 RESTful APIs
+## Contributors
+* Professor Richard Krasso
+* Student Zadkiel Rodriguez
