@@ -33,10 +33,14 @@ paths:
       description: API for adding new composers objects
       requestBody:
         description: Composer's information
+        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+                - firstName
+                - lastName
               properties:
                 firstName:
                   type: string
