@@ -2,9 +2,10 @@
     Title: RodriguezAlvarado-composer-routes.js
     Date: 02/03/2024
     Author: Zadkiel Rodriguez Alvarado
-    Description: Routes for the composer App
+    Description: Routes for the composer API
     Sources:
         https://github.com/Zadkiel26/pets-r-us
+        https://github.com/buwebdev/web-420/tree/master
 */
 //Import the Express Framework
 const express = require('express');
@@ -13,33 +14,31 @@ const router = express.Router();
 //Import the composer model
 const Composer = require('../models/RodriguezAlvarado-composer');
 
-//findAllComposers (GET Request)
-/**
+/** 
  * findAllComposers
  * @openapi
  * /api/composers:
- *   description: The list of composers
  *   get:
- *     summary: Returns a list of composers documents
  *     tags:
  *       - composers
  *     operationId: findAllComposers
- *     description: API for returning a list of composers from MongoDB Atlas
+ *     description: API to find all composers.
+ *     summary: Returns an array of composers.
  *     responses:
- *       "200":
- *        description: Composer documents
- *      "500":
- *         description: Server Exception
- *       "501":
- *         description: MongoDB Exception
-*/
-router.get("/composers", async (req, res) => {
+ *       '200':
+ *         description: Array of composer documents.
+ *       '500':
+ *         description: Server expectations.
+ *       '501': 
+ *         description: MongoDB expectations.
+ */
+router.get('/composers', async (req, res) => {
   try {
     Composer.find({}, (err, composers) => {
       if (err) {
         console.log(err);
         res.status(501).send({
-          message: "MongoDB Exception"
+          'message': 'MongoDB Exception'
         });
       } else {
         console.log(composers);
@@ -48,23 +47,19 @@ router.get("/composers", async (req, res) => {
     });
   } catch (err) {
     res.status(500).send({
-      message: "Server Exception"
+      'message': 'Server Exception'
     });
   }
 });
-
-//findComposerById (GET Request)
 /** 
  * findComposerById
  * @openapi
  * /api/composers/{id}:
- * description: The list of composers
  *   get:
- *     summary: Returns a composer document
  *     tags:
  *       - composers
- *     operationId: findComposerById
  *     description: API for returning a single composer object from MongoDB
+ *     summary: Retrieves a composer by ID.
  *     parameters:
  *       - name: id
  *         in: path
@@ -80,13 +75,13 @@ router.get("/composers", async (req, res) => {
  *       "501":
  *         description: MongoDB Exception
 */
-router.get("/composers/:id", async (req, res) => {
+router.get('/composers/:id', async (req, res) => {
   try {
     Composer.findOne({_id: req.params.id}, (err, composer) => {
       if (err) {
         console.log(err);
         res.status(501).send({
-          message: "MongoDB Exception"
+          'message': 'MongoDB Exception'
         });
       } else {
         console.log(composer);
@@ -95,22 +90,20 @@ router.get("/composers/:id", async (req, res) => {
     });
   } catch (err) {
     res.status(500).send({
-      message: "Server Exception"
+      'message': 'Server Exception'
     });
   }
 });
 
-//createComposer (POST Request)
 /**
  * createComposer
  * @openapi
  * /api/composers:
- * post:
- *     summary: Creates a new composer
+ *   post:
  *     tags:
  *       - composers
- *     operationId: createComposer
  *     description: API for adding new composers objects
+ *     summary: Create a new composer.
  *     requestBody:
  *       description: Composer's information
  *       content:
@@ -130,17 +123,17 @@ router.get("/composers/:id", async (req, res) => {
  *       "501":
  *         description: MongoDB Exception
 */
-router.post("/composers", async (req, res) => {
+router.post('/composers', async (req, res) => {
   try {
     const newComposer = {
       firstName: req.body.firstName,
       lastName: req.body.lastName
     };
-    await Composer.create(newComposer, (err, composer) => {
+    Composer.create(newComposer, (err, composer) => {
       if (err) {
         console.log(err);
         res.status(501).send({
-          message: "MongoDB Exception"
+          'message': 'MongoDB Exception'
         });
       } else {
         console.log(composer);
@@ -149,7 +142,7 @@ router.post("/composers", async (req, res) => {
     });
   } catch (err) {
     res.status(500).send({
-      message: "Server Exception"
+      'message': 'Server Exception'
     });
   }
 });

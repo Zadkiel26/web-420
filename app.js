@@ -12,6 +12,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const mongoose = require('mongoose');
 const composersAPI = require('./routes/RodriguezAlvarado-composer-routes')
+const personsAPI = require('./routes/RodriguezAlvarado-person-routes')
 
 // Create a new express app
 const app = express();
@@ -26,8 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({ 'extended': true }));
 
 // Connect to MongoDB
-const CONN = 'mongodb+srv://web420_user:Zakio1226@web420db.r59bwva.mongodb.net/web420DB'
-mongoose.connect(CONN, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+const CONN = 'mongodb+srv://web420_user:Zakio1226@web420db.r59bwva.mongodb.net/web420DB';
+mongoose.connect(CONN, {
+    promiseLibrary: require('bluebird'), 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+}).then(() => {
     console.log('Connected to MongoDB');
 }).catch(err => {
     console.log("MongoDB Error: " + err.message);
@@ -51,6 +56,7 @@ const openapiSpecification = swaggerJSDoc(options);
 // Serve the Swagger/OpenAPI specification at /api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use('/api', composersAPI);
+app.use('/api', personsAPI);
 
 // Create a new server on PORT 3000
 http.createServer(app).listen(PORT, () => {
