@@ -4,7 +4,6 @@
     Author: Zadkiel Rodriguez Alvarado
     Description: Routes for the person API
     Sources:
-        https://github.com/Zadkiel26/pets-r-us
         https://github.com/buwebdev/web-420/tree/master
 */
 // Import the Express Framework

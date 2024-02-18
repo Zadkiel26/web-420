@@ -11,8 +11,9 @@ const http = require('http');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
 const mongoose = require('mongoose');
-const composersAPI = require('./routes/RodriguezAlvarado-composer-routes')
-const personsAPI = require('./routes/RodriguezAlvarado-person-routes')
+const composersAPI = require('./routes/RodriguezAlvarado-composer-routes');
+const personsAPI = require('./routes/RodriguezAlvarado-person-routes');
+const usersAPI = require('./routes/RodriguezAlvarado-session-routes');
 
 // Create a new express app
 const app = express();
@@ -57,6 +58,7 @@ const openapiSpecification = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use('/api', composersAPI);
 app.use('/api', personsAPI);
+app.use('/api', usersAPI);
 
 // Create a new server on PORT 3000
 http.createServer(app).listen(PORT, () => {
