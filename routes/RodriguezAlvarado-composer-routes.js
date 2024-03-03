@@ -209,18 +209,11 @@ router.put('/composers/:id', async(req, res) => {
       }
     });
   } catch (err) {
-    if (err.name == 'MongoError') {
-      console.log(err);
-      res.status(501).send({
-        'message': 'MongoDB Exception'
-      });
-    } else {
       console.log(err);
       res.status(500).send({
         'message': 'Server Exception'
       });
     }
-  }
 });
 
 /**
