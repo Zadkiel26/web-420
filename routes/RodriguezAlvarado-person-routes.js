@@ -40,8 +40,10 @@ router.get('/persons', async (req, res) => {
                     'message': 'MongoDB Exception'
                 });
             } else {
-                console.log(persons);
-                res.json(persons)
+                res.status(200).send({
+                    'message': 'Array of person documents',
+                    json: persons
+                })
             }
         });
     } catch(err) {
@@ -113,8 +115,10 @@ router.post('/persons', async (req, res) => {
                 'message': 'MongoDB Exception'
             });
         } else {
-            console.log(person);
-            res.json(person);
+            res.status(200).send({
+                'message': 'Person added',
+                json: person
+            });
         }
       })  
     } catch (err) {

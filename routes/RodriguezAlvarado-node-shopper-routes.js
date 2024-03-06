@@ -67,7 +67,10 @@ router.post('/customers', async (req, res) => {
                 });
             // Else it was successfully created
             } else {
-                res.json(customer);
+                res.status(200).send({
+                    'message': 'Customer created successfully',
+                    json: customer
+                })
             }
         });
     } catch (err) {
@@ -161,7 +164,10 @@ router.post('/customers/:username/invoices', async (req, res) => {
                     if(err) {
                         console.log(err);
                     } else {
-                        res.json(updatedCustomer);
+                        res.status(200).send({
+                            'message': 'Invoice added to customer successfully.',
+                            json: updatedCustomer
+                        });
                     }
                 });
             }
@@ -193,7 +199,7 @@ router.post('/customers/:username/invoices', async (req, res) => {
  *           type: string
  *     responses:
  *       '200':
- *         description: List of Invoices found
+ *         description: Array of Invoices found
  *       '500':
  *         description: Server Exception
  *       '501':
@@ -211,7 +217,10 @@ router.get('/customers/:username/invoices', async (req, res) => {
         });
       // Else return the customer's invoices
       } else {
-        res.json(customer.invoices);
+        res.status(200).send({
+            'message': `Array of ${customer.firstName} ${customer.lastName}'s invoices.`,
+            json: customer.invoices
+        })
       }
     });
   } catch (err) {

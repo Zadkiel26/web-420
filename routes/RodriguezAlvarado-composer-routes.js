@@ -41,8 +41,10 @@ router.get('/composers', async (req, res) => {
           'message': 'MongoDB Exception'
         });
       } else {
-        console.log(composers);
-        res.json(composers);
+        res.status(200).send({
+          'message': 'Array of composer documents',
+          json: composers
+        })
       }
     });
   } catch (err) {
@@ -85,8 +87,10 @@ router.get('/composers/:id', async (req, res) => {
           'message': 'MongoDB Exception'
         });
       } else {
-        console.log(composer);
-        res.json(composer);
+        res.status(200).send({
+          'message': 'Composer document from ID',
+          json: composer
+        })
       }
     });
   } catch (err) {
@@ -118,7 +122,7 @@ router.get('/composers/:id', async (req, res) => {
  *                 type: string
  *     responses:
  *       "200":
- *         description: User added
+ *         description: Composer added
  *       "500":
  *         description: Server Exception
  *       "501":
@@ -137,8 +141,10 @@ router.post('/composers', async (req, res) => {
           'message': 'MongoDB Exception'
         });
       } else {
-        console.log(composer);
-        res.json(composer);
+        res.status(200).send({
+          'message': 'Composer created successfully',
+          json: composer
+        })
       }
     });
   } catch (err) {
@@ -200,7 +206,10 @@ router.put('/composers/:id', async(req, res) => {
         if(composer) {
           composer.set({ firstName, lastName });
           composer.save();
-          res.status(200).send(composer);
+          res.status(200).send({
+            'message': 'Composer updated successfully',
+            json: composer
+          });
         } else {
           res.status(401).send({
             'message': 'Invalid Composer ID'
@@ -250,7 +259,10 @@ router.delete('/composers/:id', async(req, res) => {
           'message': 'MongoDB Exception'
         });
       } else {
-        res.status(200).send(composer);
+        res.status(200).send({
+          'message': `${composer.firstName} ${composer.lastName} was deleted successfully`,
+          json: composer
+        });
       }
     });
   } catch (err) {
