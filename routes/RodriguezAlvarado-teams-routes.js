@@ -57,7 +57,10 @@ router.post('/teams', async (req, res) => {
                     'message': 'MongoDB Exception'
                 });
             } else {
-                res.status(200).json(team);
+                res.status(200).send({
+                    'message': "Team created successfully",
+                    json: team
+                });
             }
         });
     } catch (err) {
@@ -95,7 +98,10 @@ router.get('/teams', async(req, res) => {
                     'message': 'MongoDB Exception'
                 });
             } else {
-                res.status(200).json(teams);
+                res.status(200).send({
+                    'message': 'Array of teams documents',
+                    json: teams
+                });
             }
         });
     } catch (err) {
@@ -167,7 +173,10 @@ router.post('/teams/:id/players', async (req, res) => {
                 if(team) {
                     team.players.push(newPlayer);
                     team.save();
-                    res.status(200).json(team);
+                    res.status(200).send({
+                        'message': 'Player added to team successfully',
+                        json: team
+                    });
                 } else {
                     res.status(401).send({
                         'message': 'Invalid teamId'
@@ -221,7 +230,10 @@ router.get('/teams/:id/players', async (req, res) => {
                 });
             } else {
                 if(team) {
-                    res.status(200).send(team.players);
+                    res.status(200).send({
+                        'message': `Array of players in team: ${team.name}`,
+                        json: team.players
+                    });
                 } else {
                     res.status(401).send({
                         'message': 'Invalid teamID'
@@ -276,7 +288,7 @@ router.delete('/teams/:id', async (req, res) => {
             } else {
                 if(team) {
                     res.status(200).send({
-                        'message': 'Team deleted',
+                        'message': `${team.name} was deleted successfully`,
                         json: team
                     });
                 } else {
