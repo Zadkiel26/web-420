@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ 'extended': true }));
 
 // Connect to MongoDB
-const CONN = 'mongodb+srv://web420_user:Zakio1226@web420db.r59bwva.mongodb.net/web420DB';
+const CONN = 'mongodb+srv://web420_user:Zakio1226@web420db.r59bwva.mongodb.net/web420DB?retryWrites=true&w=majority';
 mongoose.connect(CONN, {
     promiseLibrary: require('bluebird'), 
     useNewUrlParser: true, 
