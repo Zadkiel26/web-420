@@ -15,6 +15,7 @@ const composersAPI = require('./routes/RodriguezAlvarado-composer-routes');
 const personsAPI = require('./routes/RodriguezAlvarado-person-routes');
 const usersAPI = require('./routes/RodriguezAlvarado-session-routes');
 const customerAPI = require('./routes/RodriguezAlvarado-node-shopper-routes');
+const teamsAPI = require('./routes/RodriguezAlvarado-teams-routes');
 
 // Create a new express app
 const app = express();
@@ -61,6 +62,7 @@ app.use('/api', composersAPI);
 app.use('/api', personsAPI);
 app.use('/api', usersAPI);
 app.use('/api', customerAPI);
+app.use('/api', teamsAPI);
 
 // Create a new server on PORT 3000
 http.createServer(app).listen(PORT, () => {
